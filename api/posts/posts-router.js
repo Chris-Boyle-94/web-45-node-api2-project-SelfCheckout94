@@ -38,7 +38,8 @@ router.post("/", async (req, res) => {
       });
     } else {
       const newPost = await Posts.insert({ title, contents });
-      res.status(201).json(newPost);
+      const post = await Posts.findById(newPost.id);
+      res.status(201).json(post);
     }
   } catch (err) {
     res.status(500).json({
